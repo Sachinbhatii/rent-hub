@@ -1,59 +1,81 @@
-# RentHub
+# RentHub - Angular Assignment
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.9.
+## Overview
+RentHub is a web-based application designed to simplify the process of finding and renting apartments. It provides a seamless platform for landlords to post listings and for prospective renters to search, filter, and engage through comments.
 
-## Development server
+---
 
-To start a local development server, run:
+## 🚀 Features
+- **Post Apartments for Rent**  
+  Landlords can create detailed listings with descriptions, photos, rental terms, and contact info.
 
-```bash
-ng serve
+- **Show Interest**  
+  Users can mark listings as favorites or send inquiries.
+
+- **Comment and Reply**  
+  Interactive discussion system for questions and negotiations.
+
+- **Search and Filter**  
+  Advanced search and filtering options by location, price range, furnished status, and amenities.
+
+- **User Authentication**   
+  Secure login and registration for authorized posting and commenting.
+
+---
+
+## 🖥️ Screens
+- **Home Screen**  
+  Displays all available listings with quick actions: View Details and Favorite. Includes search bar and advanced filter dropdown.
+
+- **Create New Post**  
+  Form to collect property details, amenities, furnished status, and contact info. Includes photo upload with preview.
+
+- **View Details**  
+  Shows full property details and allows commenting and replying.
+
+---
+
+## ✅ Tech Stack
+- **Angular** (Latest CLI)
+- **IndexedDB** for local storage
+- **SCSS** for styling
+- **Responsive Design**
+
+---
+
+## 🔑 Key Functionalities
+- **Form Validation** on Create Post and Comment forms.
+- **Photo Upload Preview** (max 5 images).
+- **Favorites Management** using IndexedDB.
+- **Dynamic Filtering**:
+  - Search by title, building, or location.
+  - Price range filter.
+  - Furnished/Shared property filter.
+  - Amenities filter.
+
+---
+
+## 🛠️ Setup Instructions
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-link>
+   cd renthub
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+2. Install dependencies:
+   ```bash
+   npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
+3. Run the application:
+   ```bash
+   ng serve
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
+4. Open in browser:
+   ```bash
+http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

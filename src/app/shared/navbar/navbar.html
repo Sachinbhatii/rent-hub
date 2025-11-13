@@ -7,6 +7,7 @@
     <ul class="nav-links" [class.open]="menuOpen">
       <li (click)="toggleMenu()"><a routerLink="/">Home</a></li>
       <li *ngIf="auth.isLoggedIn()" (click)="toggleMenu()"><a routerLink="/create-post">Create Post</a></li>
+      <li (click)="toggleMenu()"><a routerLink="/favorites">★ Favorites</a></li>
       <li *ngIf="!auth.isLoggedIn()" (click)="toggleMenu()"><a routerLink="/login">Login</a></li>
       <li *ngIf="!auth.isLoggedIn()" (click)="toggleMenu()"><a routerLink="/signup">Signup</a></li>
       <li *ngIf="auth.isLoggedIn()"><button class="logout-btn" (click)="logout(); toggleMenu()">Logout</button></li>

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './core/guards/auth-guard'; 
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -42,5 +42,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./legal/privacy-policy/privacy-policy').then(m => m.PrivacyPolicy),
   },
+  {
+    path: 'favorites',
+    loadComponent: () =>
+      import('./pages/favorites/favorites').then(m => m.Favorites)
+  },
   { path: '**', redirectTo: '/home' },
+
 ];
