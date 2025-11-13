@@ -1,32 +1,79 @@
 <div class="details-container" *ngIf="post">
   <h2>{{ post.title }}</h2>
-  <p>{{ post.description }}</p>
-  <p><strong>Price:</strong> ₹{{ post.price }}</p>
-  <p><strong>Location:</strong> {{ post.location }}</p>
+  <p class="description">{{ post.description }}</p>
 
+  <hr />
+
+  <!-- Apartment & Building -->
+  <p><strong>Apartment:</strong> {{ post.apartment }}</p>
+  <p><strong>Building Name:</strong> {{ post.buildingName }}</p>
+
+  <!-- Shared Property -->
+  <p><strong>Shared Property:</strong> {{ post.shared === 'yes' ? 'Yes' : 'No' }}</p>
+
+  <!-- Location -->
+  <p><strong>Address:</strong> {{ post.address }}</p>
+
+  <!-- Property Details -->
+  <p><strong>Square Feet:</strong> {{ post.squareFeet }} sq.ft</p>
+  <p><strong>Lease Type:</strong>
+    <span *ngIf="post.leaseType === 'long'">Long term (6+ months)</span>
+    <span *ngIf="post.leaseType === 'short'">Short term</span>
+    <span *ngIf="post.leaseType === 'both'">Both</span>
+  </p>
+
+  <!-- Expected Rent -->
+  <p><strong>Expected Rent:</strong> ₹{{ post.expectedRent }}</p>
+  <p><strong>Negotiable:</strong> {{ post.negotiable ? 'Yes' : 'No' }}</p>
+  <p><strong>Price Mode:</strong> {{ post.priceMode === 'perMonth' ? 'Per Month' : '' }}</p>
+  <p><strong>Utilities Included:</strong> {{ post.utilitiesIncluded ? 'Yes' : 'No' }}</p>
+
+  <!-- Furnished -->
+  <p><strong>Furnished:</strong> {{ post.furnished === 'yes' ? 'Yes' : 'No' }}</p>
+
+  <!-- Amenities -->
+  <div class="amenities">
+    <h3>Amenities Included:</h3>
+    <ul>
+      <li *ngIf="post.amenities.gym">Gym/Fitness Center</li>
+      <li *ngIf="post.amenities.swimmingPool">Swimming Pool</li>
+      <li *ngIf="post.amenities.carPark">Car Park</li>
+      <li *ngIf="post.amenities.visitorsParking">Visitors Parking</li>
+      <li *ngIf="post.amenities.powerBackup">Power Backup</li>
+      <li *ngIf="post.amenities.garbageDisposal">Garbage Disposal</li>
+      <li *ngIf="post.amenities.privateLawn">Private Lawn</li>
+      <li *ngIf="post.amenities.waterHeater">Water Heater</li>
+      <li *ngIf="post.amenities.plantSecurity">Plant Security System</li>
+      <li *ngIf="post.amenities.laundryService">Laundry Service</li>
+      <li *ngIf="post.amenities.elevator">Elevator</li>
+      <li *ngIf="post.amenities.clubHouse">Club House</li>
+    </ul>
+  </div>
+
+  <!-- Contact Info -->
+  <p><strong>Contact:</strong> {{ post.contact }}</p>
+
+  <!-- Photos -->
   <div class="photos">
     <img *ngFor="let p of post.photos" [src]="p" alt="photo" />
   </div>
 
   <hr />
 
+  <!-- Comments Section -->
   <div class="comments-section">
     <h3>Discussion</h3>
-
-    <!-- Main comment form -->
     <form [formGroup]="mainCommentForm" (ngSubmit)="addComment(null)">
       <textarea formControlName="text" placeholder="Ask a question or comment..." rows="3"></textarea>
       <button type="submit" [disabled]="mainCommentForm.invalid">Post Comment</button>
     </form>
 
-    <!-- Comment Tree -->
     <div class="comment-thread">
       <ng-container *ngFor="let comment of getRootComments()">
         <ng-container *ngTemplateOutlet="commentTemplate; context: { $implicit: comment }"></ng-container>
       </ng-container>
     </div>
 
-    <!-- Recursive comment template -->
     <ng-template #commentTemplate let-comment>
       <div class="comment-box">
         <p class="meta">
@@ -34,10 +81,8 @@
           <span>{{ comment.createdAt | date:'short' }}</span>
         </p>
         <p class="text">{{ comment.text }}</p>
-
         <button class="reply-btn" (click)="toggleReplyForm(comment.id)">Reply</button>
 
-        <!-- Reply form (safe binding) -->
         <div class="reply-form" *ngIf="replyForms[comment.id]">
           <form *ngIf="replyForms[comment.id] as replyForm" [formGroup]="replyForm" (ngSubmit)="addComment(comment.id)">
             <textarea formControlName="text" placeholder="Write a reply..." rows="2"></textarea>
@@ -45,7 +90,6 @@
           </form>
         </div>
 
-        <!-- Nested replies -->
         <div class="nested-replies" *ngFor="let reply of getReplies(comment.id)">
           <ng-container *ngTemplateOutlet="commentTemplate; context: { $implicit: reply }"></ng-container>
         </div>

@@ -9,33 +9,46 @@ import { DB } from '../../core/services/db';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './create-post.html',
-  styleUrl: './create-post.scss',
+  styleUrls: ['./create-post.scss'],
 })
 export class CreatePost {
   form!: FormGroup;
   successMsg = '';
-  photos: string[] = []; // store base64 image data for preview
+  photos: string[] = [];
 
   constructor(private fb: FormBuilder, private db: DB, private router: Router) {
     this.form = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      price: ['', Validators.required],
-      location: ['', Validators.required],
+      apartment: ['', Validators.required],
+      buildingName: ['', Validators.required],
+      shared: ['no', Validators.required],
+      address: ['', Validators.required],
+      squareFeet: ['', Validators.required],
+      leaseType: ['long', Validators.required],
+      expectedRent: ['', Validators.required],
+      negotiable: [false],
+      priceMode: ['perMonth', Validators.required],
+      utilitiesIncluded: [false],
       furnished: ['no', Validators.required],
       amenities: this.fb.group({
-        wifi: [false],
-        parking: [false],
-        ac: [false],
         gym: [false],
+        swimmingPool: [false],
+        carPark: [false],
+        visitorsParking: [false],
+        powerBackup: [false],
+        garbageDisposal: [false],
+        privateLawn: [false],
+        waterHeater: [false],
+        plantSecurity: [false],
+        laundryService: [false],
+        elevator: [false],
+        clubHouse: [false],
       }),
-      vegetarian: ['no', Validators.required],
+      title: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(1400)]],
       contact: ['', Validators.required],
     });
   }
 
-
-  // 📸 Handle file uploads
   onFileChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (!input.files) return;

@@ -1,12 +1,53 @@
 <div class="home-wrapper">
     <h2>Available Apartments</h2>
 
+    <!-- Search & Filter Section -->
+    <div class="search-filter-bar">
+        <!-- Search Bar -->
+        <input type="text" [(ngModel)]="searchText" placeholder="Search by title, location, or building..." />
+
+        <!-- Hamburger Icon -->
+        <button class="hamburger" (click)="toggleFilters()">
+            ☰
+        </button>
+    </div>
+
+    <!-- Advanced Filters Dropdown -->
+    <div class="filter-dropdown" *ngIf="showFilters">
+        <h3>Advanced Filters</h3>
+
+        <div class="filter-group">
+            <label>Location</label>
+            <input type="text" [(ngModel)]="filters.location" placeholder="Enter location" />
+        </div>
+
+        <div class="filter-group">
+            <label>Price Range</label>
+            <input type="number" [(ngModel)]="minPrice" placeholder="Min Price" />
+            <input type="number" [(ngModel)]="maxPrice" placeholder="Max Price" />
+        </div>
+
+        <div class="filter-group">
+            <label><input type="checkbox" [(ngModel)]="filters.furnished" /> Furnished</label>
+            <label><input type="checkbox" [(ngModel)]="filters.shared" /> Shared Property</label>
+        </div>
+
+        <div class="filter-group amenities">
+            <label *ngFor="let amenity of amenityList">
+                <input type="checkbox" [(ngModel)]="filters.amenities[amenity]" /> {{ amenity }}
+            </label>
+        </div>
+
+        <button class="apply-btn" (click)="applyFilters()">Apply Filters</button>
+    </div>
+
+    <!-- Post List -->
     <div class="post-list">
-        <div *ngFor="let post of posts" class="post-card">
+        <div *ngFor="let post of filteredPosts()" class="post-card">
             <img [src]="post.photos?.[0] || 'assets/no-image.png'" alt="Photo" />
             <h3>{{ post.title }}</h3>
-            <p class="location">{{ post.location }}</p>
-            <p class="price">₹{{ post.price }}</p>
+            <p class="location">{{ post.address }}</p>
+            <p class="price">₹{{ post.expectedRent }}</p>
             <div class="actions">
                 <button (click)="viewDetails(post)">View Details</button>
                 <button (click)="toggleFavorite(post)">
