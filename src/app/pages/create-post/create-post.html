@@ -1,0 +1,56 @@
+<div class="create-post-wrapper">
+    <div class="card">
+        <h2>Create New Post</h2>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <label>Title</label>
+            <input type="text" formControlName="title" />
+
+            <label>Description</label>
+            <textarea formControlName="description"></textarea>
+
+            <label>Price (₹)</label>
+            <input type="number" formControlName="price" />
+
+            <label>Location</label>
+            <input type="text" formControlName="location" />
+
+            <label>Furnished</label>
+            <select formControlName="furnished">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label>Amenities</label>
+            <div formGroupName="amenities" class="amenities">
+                <label><input type="checkbox" formControlName="wifi" /> WiFi</label>
+                <label><input type="checkbox" formControlName="parking" /> Parking</label>
+                <label><input type="checkbox" formControlName="ac" /> AC</label>
+                <label><input type="checkbox" formControlName="gym" /> Gym</label>
+            </div>
+
+            <label>Vegetarian Preference</label>
+            <div class="radio-group">
+                <label><input type="radio" formControlName="vegetarian" value="yes" /> Yes</label>
+                <label><input type="radio" formControlName="vegetarian" value="no" /> No</label>
+            </div>
+
+            <label>Contact Info</label>
+            <input type="text" formControlName="contact" />
+
+            <!-- 📸 Photo Upload Section -->
+            <label>Upload Photos (max 5)</label>
+            <input type="file" (change)="onFileChange($event)" accept="image/*" multiple />
+
+            <div class="photo-preview" *ngIf="photos.length > 0">
+                <div *ngFor="let photo of photos; let i = index" class="photo-item">
+                    <img [src]="photo" alt="Preview" />
+                    <button type="button" class="remove" (click)="removePhoto(i)">×</button>
+                </div>
+            </div>
+            <button type="submit" class="btn" [disabled]="form.invalid">Submit</button>
+
+            <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
+        </form>
+    </div>
+</div>

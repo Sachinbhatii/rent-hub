@@ -1,0 +1,72 @@
+.details-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+
+  .photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    img {
+      width: 48%;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+  }
+
+  .comments-section {
+    margin-top: 2rem;
+
+    textarea {
+      width: 100%;
+      border: 1px solid #dbe2e8;
+      border-radius: 8px;
+      padding: 0.75rem;
+      resize: none;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background: #006d77;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    .comment-box {
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-left: 4px solid #006d77;
+
+      .meta {
+        color: #333;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .reply-btn {
+        background: none;
+        border: none;
+        color: #006d77;
+        font-size: 0.9rem;
+        cursor: pointer;
+        margin-top: 0.5rem;
+      }
+
+      .nested-replies {
+        margin-left: 2rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

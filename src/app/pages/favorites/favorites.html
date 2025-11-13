@@ -1,0 +1,20 @@
+<div class="favorites-wrapper">
+  <h2>Your Favorites</h2>
+
+  <div class="post-list" *ngIf="favorites.length; else empty">
+    <div *ngFor="let post of favorites" class="post-card">
+      <img [src]="post.photos?.[0] || 'assets/no-image.png'" alt="Photo" />
+      <h3>{{ post.title }}</h3>
+      <p class="location">{{ post.location }}</p>
+      <p class="price">₹{{ post.price }}</p>
+      <div class="actions">
+        <button (click)="viewDetails(post)">View Details</button>
+        <button (click)="remove(post)">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #empty>
+    <p class="empty">You haven’t favorited any posts yet.</p>
+  </ng-template>
+</div>

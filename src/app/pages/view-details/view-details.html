@@ -1,0 +1,55 @@
+<div class="details-container" *ngIf="post">
+  <h2>{{ post.title }}</h2>
+  <p>{{ post.description }}</p>
+  <p><strong>Price:</strong> ₹{{ post.price }}</p>
+  <p><strong>Location:</strong> {{ post.location }}</p>
+
+  <div class="photos">
+    <img *ngFor="let p of post.photos" [src]="p" alt="photo" />
+  </div>
+
+  <hr />
+
+  <div class="comments-section">
+    <h3>Discussion</h3>
+
+    <!-- Main comment form -->
+    <form [formGroup]="mainCommentForm" (ngSubmit)="addComment(null)">
+      <textarea formControlName="text" placeholder="Ask a question or comment..." rows="3"></textarea>
+      <button type="submit" [disabled]="mainCommentForm.invalid">Post Comment</button>
+    </form>
+
+    <!-- Comment Tree -->
+    <div class="comment-thread">
+      <ng-container *ngFor="let comment of getRootComments()">
+        <ng-container *ngTemplateOutlet="commentTemplate; context: { $implicit: comment }"></ng-container>
+      </ng-container>
+    </div>
+
+    <!-- Recursive comment template -->
+    <ng-template #commentTemplate let-comment>
+      <div class="comment-box">
+        <p class="meta">
+          <strong>{{ comment.username }}</strong>
+          <span>{{ comment.createdAt | date:'short' }}</span>
+        </p>
+        <p class="text">{{ comment.text }}</p>
+
+        <button class="reply-btn" (click)="toggleReplyForm(comment.id)">Reply</button>
+
+        <!-- Reply form (safe binding) -->
+        <div class="reply-form" *ngIf="replyForms[comment.id]">
+          <form *ngIf="replyForms[comment.id] as replyForm" [formGroup]="replyForm" (ngSubmit)="addComment(comment.id)">
+            <textarea formControlName="text" placeholder="Write a reply..." rows="2"></textarea>
+            <button type="submit" [disabled]="replyForm.invalid">Reply</button>
+          </form>
+        </div>
+
+        <!-- Nested replies -->
+        <div class="nested-replies" *ngFor="let reply of getReplies(comment.id)">
+          <ng-container *ngTemplateOutlet="commentTemplate; context: { $implicit: reply }"></ng-container>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

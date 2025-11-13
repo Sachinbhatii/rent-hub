@@ -1,0 +1,11 @@
+@use '../home/home.scss' as *;
+
+.favorites-wrapper {
+  @extend .home-wrapper;
+
+  .empty {
+    text-align: center;
+    color: #777;
+    margin-top: 2rem;
+  }
+}

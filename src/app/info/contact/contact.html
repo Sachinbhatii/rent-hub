@@ -1,0 +1,21 @@
+<div class="page-wrapper">
+    <div class="card">
+        <h2>Contact Us</h2>
+        <p>We’d love to hear from you! Please fill out the form below.</p>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <label>Name</label>
+            <input type="text" formControlName="name" />
+
+            <label>Email</label>
+            <input type="email" formControlName="email" />
+
+            <label>Message</label>
+            <textarea formControlName="message"></textarea>
+
+            <button class="btn" type="submit" [disabled]="form.invalid">Send Message</button>
+
+            <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
+        </form>
+    </div>
+</div>

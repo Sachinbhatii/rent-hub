@@ -1,0 +1,41 @@
+.page-wrapper {
+    background: #f4f7f9;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+
+    .card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        max-width: 700px;
+
+        h2 {
+            color: #006d77;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        h3 {
+            color: #ff9f1c;
+            margin-top: 1rem;
+        }
+
+        p {
+            color: #333;
+            line-height: 1.6;
+            margin-top: 0.5rem;
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+    }
+}

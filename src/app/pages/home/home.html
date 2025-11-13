@@ -1,0 +1,18 @@
+<div class="home-wrapper">
+    <h2>Available Apartments</h2>
+
+    <div class="post-list">
+        <div *ngFor="let post of posts" class="post-card">
+            <img [src]="post.photos?.[0] || 'assets/no-image.png'" alt="Photo" />
+            <h3>{{ post.title }}</h3>
+            <p class="location">{{ post.location }}</p>
+            <p class="price">₹{{ post.price }}</p>
+            <div class="actions">
+                <button (click)="viewDetails(post)">View Details</button>
+                <button (click)="toggleFavorite(post)">
+                    {{ isFavorite(post) ? '★ Favorited' : '☆ Favorite' }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="login-wrapper">
+    <div class="card">
+        <h2>Login</h2>
+        <form (ngSubmit)="submit()" #loginForm="ngForm">
+            <label>Email</label>
+            <input type="email" name="email" [(ngModel)]="email" required #emailInput="ngModel" />
+            <div *ngIf="emailInput.invalid && emailInput.touched" class="error">Email is required</div>
+
+            <label>Password</label>
+            <input type="password" name="password" [(ngModel)]="password" required minlength="6" #pwInput="ngModel" />
+            <div *ngIf="pwInput.invalid && pwInput.touched" class="error">
+                Password is required (min 6 chars)
+            </div>
+
+            <button class="btn" type="submit" [disabled]="loginForm.invalid">Login</button>
+        </form>
+
+        <div class="signup-link">
+            Don’t have an account? <a routerLink="/signup">Sign up</a>
+        </div>
+
+        <div *ngIf="error" class="error">{{ error }}</div>
+    </div>
+</div>
